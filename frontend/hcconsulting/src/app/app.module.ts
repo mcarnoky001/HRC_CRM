@@ -11,6 +11,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import  { CalendarComponent } from './calendar/calendar.component';
 import { DemoUtilsModule } from '../utils/module';
+import { CalendarControllerComponent } from './calendar-controller/calendar-controller.component';
 
 const appRoutes: Routes = [
   { path: '', component: ClientsComponent },
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
     AppComponent,
     ClientsComponent,
     AboutComponent,
-    CalendarComponent
+    CalendarComponent,
+    CalendarControllerComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
