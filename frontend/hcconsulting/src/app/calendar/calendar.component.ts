@@ -1,7 +1,8 @@
-import { Component, OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef } from '@angular/core';
+import { Component, OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef,Input } from '@angular/core';
 import {startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addHours} from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {CalendarEventDetailComponent} from '../calendar-event-detail/calendar-event-detail.component';
 import {CalendarEvent,CalendarEventAction,CalendarEventTimesChangedEvent} from 'angular-calendar';
 
 const colors: any = {
@@ -29,7 +30,7 @@ export class CalendarComponent{
 	@ViewChild('modalContent') modalContent: TemplateRef<any>;
 
   view: string = 'month';
-
+  eventToPass :CalendarEvent;
   viewDate: Date = new Date();
 
   modalData: {
@@ -120,7 +121,8 @@ export class CalendarComponent{
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.eventToPass = event;
+    this.modal.open(CalendarEventDetailComponent, { size: 'lg' });
   }
 
   addEvent(): void {

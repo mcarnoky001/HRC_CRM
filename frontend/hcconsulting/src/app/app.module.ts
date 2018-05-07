@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 import  { CalendarComponent } from './calendar/calendar.component';
 import { DemoUtilsModule } from '../utils/module';
 import { CalendarControllerComponent } from './calendar-controller/calendar-controller.component';
+import { CalendarEventDetailComponent } from './calendar-event-detail/calendar-event-detail.component';
+import { ScrollToModule } from 'ng2-scroll-to-el';
 
 const appRoutes: Routes = [
   { path: '', component: ClientsComponent },
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     ClientsComponent,
     AboutComponent,
     CalendarComponent,
-    CalendarControllerComponent
+    CalendarControllerComponent,
+    CalendarEventDetailComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -33,6 +36,7 @@ const appRoutes: Routes = [
     FormsModule,
     CommonModule,
     NgbModalModule.forRoot(),
+    ScrollToModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
