@@ -4,6 +4,9 @@ import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEventDetailComponent} from '../calendar-event-detail/calendar-event-detail.component';
 import {CalendarEvent,CalendarEventAction,CalendarEventTimesChangedEvent} from 'angular-calendar';
+import {trigger, state, style, transition, animate} from '@angular/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenav } from '@angular/material';
 
 const colors: any = {
   red: {
@@ -24,20 +27,48 @@ const colors: any = {
   selector: 'app-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({
+        transform: 'translate3d(0, 0, 0)'
+      })),
+      state('out', style({
+        transform: 'translate3d(100%, 0, 0)'
+      })),
+      transition('in => out', animate('700ms ease-in-out')),
+      transition('out => in', animate('700ms ease-in-out'))
+    ]),
+  ]
 })
 export class CalendarComponent{
 	@ViewChild('modalContent') modalContent: TemplateRef<any>;
-
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  @ViewChild('hamburgerbutton') hamburgerbutton: TemplateRef<any>;
+  eventsS: string[] = [];
+  opened: boolean;
   view: string = 'month';
-  eventToPass :CalendarEvent;
   viewDate: Date = new Date();
+  menuState:string = 'out';
+  isClosed = true;
+
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
 
+
+  hamburger_cross() {
+
+      if (this.isClosed == true) {          
+        this.isClosed = false;
+        this.sidenav.toggle()
+      } else {   
+        this.isClosed = true;
+        this.sidenav.toggle()
+      }
+  }
   actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
@@ -121,8 +152,8 @@ export class CalendarComponent{
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
-    this.eventToPass = event;
-    this.modal.open(CalendarEventDetailComponent, { size: 'lg' });
+    const modalRef = this.modal.open(CalendarEventDetailComponent, { size: 'lg' });
+    modalRef.componentInstance.CalendarEvent = event;
   }
 
   addEvent(): void {
@@ -141,6 +172,11 @@ export class CalendarComponent{
   }
 
   ngOnInit() {
+  }
+
+  toggleMenu() {
+    // 1-line if statement that toggles the value:
+    this.menuState = this.menuState === 'out' ? 'in' : 'out';
   }
 
 }

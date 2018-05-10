@@ -7,13 +7,14 @@ import { AppComponent } from './app.component';
 import { ClientsComponent } from './clients/clients.component';
 import { AboutComponent } from './about/about.component';
 import { CalendarModule } from 'angular-calendar';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule,NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import  { CalendarComponent } from './calendar/calendar.component';
 import { DemoUtilsModule } from '../utils/module';
 import { CalendarControllerComponent } from './calendar-controller/calendar-controller.component';
 import { CalendarEventDetailComponent } from './calendar-event-detail/calendar-event-detail.component';
 import { ScrollToModule } from 'ng2-scroll-to-el';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 const appRoutes: Routes = [
   { path: '', component: ClientsComponent },
@@ -40,10 +41,12 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
-    DemoUtilsModule
+    DemoUtilsModule,
+    MatSidenavModule,
   ],
+  entryComponents: [CalendarEventDetailComponent],
   exports:[CalendarComponent],
-  providers: [],
+  providers: [NgbActiveModal],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

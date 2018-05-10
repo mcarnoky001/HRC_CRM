@@ -1,7 +1,7 @@
 import { Component, OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef,Input,OnChanges,SimpleChanges} from '@angular/core';
 import {startOfDay,endOfDay,subDays,addDays,endOfMonth,isSameDay,isSameMonth,addHours} from 'date-fns';
 import { Subject } from 'rxjs/Subject';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent,CalendarEventAction,CalendarEventTimesChangedEvent} from 'angular-calendar';
 
 @Component({
@@ -23,7 +23,7 @@ export class CalendarEventDetailComponent implements OnInit,OnChanges {
     event: CalendarEvent;
   };
 
-  constructor(private modal: NgbModal) {}
+   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit(){
   	this.modalData = {action:"Clicked",event: this.CalendarEvent};
