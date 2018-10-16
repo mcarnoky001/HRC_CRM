@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Preview
 
-![Image of preview1](preview1.PNG)
+![Image of preview1](/frontend/hcconsulting/preview1.PNG)
 
-![Image of preview2](preview2.PNG)
+![Image of preview2](/frontend/hcconsulting/preview2.PNG)
 
 ## Development server
 
